@@ -11,6 +11,9 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import user from './user/slice';
+import loader from './loader/slice';
+import error from './error/slice';
+import filter from './filter/slice';
 
 const middleware = getDefaultMiddleware({
   immutableCheck: false,
@@ -29,6 +32,9 @@ const persistConfig = {
 export const store = configureStore({
   reducer: {
     auth: persistReducer(persistConfig, user),
+    loader,
+    error,
+    filter,
   },
   middleware,
   devTools: process.env.NODE_ENV !== 'production',

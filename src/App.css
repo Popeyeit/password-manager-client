@@ -30,6 +30,39 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+p,
+a,
+span,
+input {
   margin: 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+#root {
+  font-family: 'Montserrat', sans-serif;
+}
+/* GLOBAL STYLES */
+
+.container {
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1400px;
+    padding: 0 30px;
+  }
+}
+@media (min-width: 1440px) {
+  .container {
+    max-width: 2000px;
+  }
 }

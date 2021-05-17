@@ -2,9 +2,10 @@ import React, { useEffect } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import DashBoard from './pages/dashBoard/DashBoard';
-// import Sidebar from './components/sidebar/Sidebar';
-// import { getCurrentUserOperation } from './redux/user/operation';
+import Home from './pages/home/Home';
+import { getCurrentUserOperation } from './redux/user/operations';
 import './App.css';
+import Auth from './components/auth/Auth';
 
 const redirectToHome = () => {
   return <Redirect to="/home" />;
@@ -13,22 +14,38 @@ const redirectToHome = () => {
 function App() {
   const { token } = useSelector(state => state.auth);
 
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(getCurrentUserOperation());
-  // }, [dispatch]);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCurrentUserOperation());
+  }, [dispatch]);
   return (
     <div className="App">
       <Switch>
-        {!token ? (
-          <Route path="/home">
-            <DashBoard />
-          </Route>
+        {token ? (
+          <Switch>
+            <Route path="/home">
+              <DashBoard />
+            </Route>
+            <Redirect to="/home" />
+          </Switch>
         ) : (
-          <Route path="/home"></Route>
+          <Switch>
+            <Route path="/home" exact>
+              <Home />
+            </Route>
+            <Route path="/sign-up">
+              <Auth textBtn="Регистрация" type="signUp" />
+            </Route>
+            <Route path="/recover-password">
+              <Auth textBtn="Восстановить" type="recoverPassword" />
+            </Route>
+            <Route path="/sign-in">
+              <Auth textBtn="Вход" type="signIn" />
+            </Route>
+            <Redirect to="/home" />
+          </Switch>
         )}
       </Switch>
-      {redirectToHome()}
     </div>
   );
 }

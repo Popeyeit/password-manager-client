@@ -1,0 +1,20 @@
+.page {
+  background-color: #f6f6f6;
+  min-height: 100vh;
+  background-size: cover;
+}
+.content_wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+.wrapper {
+  /* padding: 80px 0 40px 0; */
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    display: flex;
+    justify-content: space-between;
+    /* flex-wrap: wrap; */
+  }
+}

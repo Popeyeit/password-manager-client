@@ -1,0 +1,89 @@
+.item {
+  text-align: center;
+  margin: 0 auto;
+  width: 70%;
+  border-radius: 6px;
+  box-shadow: 0 2px 20px rgba(70 75 75/0.5);
+  padding: 20px 0;
+  position: relative;
+  background-color: #fff;
+  max-width: 350px;
+  max-height: 140px;
+}
+
+.item {
+  margin-bottom: 40px;
+}
+
+.setting {
+  right: 10px;
+  top: 10px;
+  position: absolute;
+  background-image: url('../../img/settings.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+}
+.setting:hover {
+  transform: scale(1.2);
+}
+
+.item p {
+  padding: 0 10px;
+  overflow: hidden;
+  font-size: 20px;
+  margin-bottom: 14px;
+}
+.item label {
+  position: relative;
+}
+.item input {
+  padding: 4px;
+  width: 80%;
+  height: 44px;
+  border: 1px solid rgb(224, 224, 224);
+  border-radius: 5px;
+  color: rgb(79, 79, 79);
+  font-size: 18px;
+  line-height: 19px;
+  padding: 8px 20px;
+  outline: none;
+  margin-bottom: 6px;
+}
+.show {
+  right: 4px;
+  position: absolute;
+  background-image: url('../../img/eye.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 15px;
+  height: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.show_active {
+  composes: show;
+  background-image: url('../../img/invisible.svg');
+}
+
+@media (min-width: 768px) {
+  .item {
+    margin: 0;
+  }
+}
+@media (min-width: 1130px) {
+  .item {
+    max-width: 280px;
+    margin-right: 20px;
+  }
+}
+
+.item {
+  margin-bottom: 40px;
+}
