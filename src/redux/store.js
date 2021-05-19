@@ -14,6 +14,7 @@ import user from './user/slice';
 import loader from './loader/slice';
 import error from './error/slice';
 import filter from './filter/slice';
+import passwords from './password/slice';
 
 const middleware = getDefaultMiddleware({
   immutableCheck: false,
@@ -35,6 +36,7 @@ export const store = configureStore({
     loader,
     error,
     filter,
+    passwords,
   },
   middleware,
   devTools: process.env.NODE_ENV !== 'production',

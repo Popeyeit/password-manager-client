@@ -11,7 +11,7 @@ import { setLoader, unsetLoader } from '../loader/slice';
 import { setError } from '../error/slice';
 export const registerOperation = data => async dispatch => {
   try {
-    setLoader(true);
+    dispatch(setLoader(true));
     const res = await api.requestPost('/register', data);
     dispatch(register(res.data.email));
     dispatch(setToken(res.data.token));
@@ -19,13 +19,13 @@ export const registerOperation = data => async dispatch => {
   } catch (error) {
     dispatch(setError(error.response.data));
   } finally {
-    unsetLoader(false);
+    dispatch(unsetLoader(false));
   }
 };
 
 export const loginOperation = data => async dispatch => {
   try {
-    setLoader(true);
+    dispatch(setLoader(true));
 
     const res = await api.requestPost('/login', data);
     dispatch(login(res.data.email));
@@ -34,7 +34,7 @@ export const loginOperation = data => async dispatch => {
   } catch (error) {
     dispatch(setError(error.response.data));
   } finally {
-    unsetLoader(false);
+    dispatch(unsetLoader(false));
   }
 };
 export const getCurrentUserOperation = () => async (dispatch, getState) => {
@@ -45,7 +45,7 @@ export const getCurrentUserOperation = () => async (dispatch, getState) => {
     return;
   }
   try {
-    setLoader(true);
+    dispatch(setLoader(true));
     api.setToken(hasToken);
     const res = await api.requestGet('/currentUser');
     dispatch(current(res.data.email));
@@ -58,7 +58,7 @@ export const getCurrentUserOperation = () => async (dispatch, getState) => {
     }
     dispatch(setError(error.response.data));
   } finally {
-    unsetLoader(false);
+    dispatch(unsetLoader(false));
   }
 };
 

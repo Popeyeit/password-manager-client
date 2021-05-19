@@ -63,6 +63,6 @@ input {
 }
 @media (min-width: 1440px) {
   .container {
-    max-width: 2000px;
+    max-width: 1844px;
   }
 }

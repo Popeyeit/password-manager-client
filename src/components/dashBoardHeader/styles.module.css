@@ -57,7 +57,7 @@
   color: #fff;
 }
 .logout:hover {
-  transform: scale(1.2);
+  background-color: rgba(0, 0, 255, 0.7);
 }
 .logout::after {
   content: '';

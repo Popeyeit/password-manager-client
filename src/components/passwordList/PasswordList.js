@@ -1,23 +1,14 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import Item from '../passwordItem/PasswordItem';
 import styles from './styles.module.css';
 
-const PasswordList = ({}) => {
-  const [showPas, setShowPas] = useState(false);
-
-  const handleChange = () => {
-    setShowPas(prev => !prev);
-  };
-
+const PasswordList = ({ data, handleModal }) => {
   return (
     <div className={styles.wrapper}>
       <ul className={styles.list}>
-        <Item showPas={showPas} handleChange={handleChange} />
-        <Item showPas={showPas} handleChange={handleChange} />
-        <Item showPas={showPas} handleChange={handleChange} />
-        <Item showPas={showPas} handleChange={handleChange} />
-        <Item showPas={showPas} handleChange={handleChange} />
+        {data.map(password => (
+          <Item key={password.id} {...password} handleModal={handleModal} />
+        ))}
       </ul>
     </div>
   );
