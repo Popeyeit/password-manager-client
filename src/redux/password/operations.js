@@ -44,8 +44,8 @@ export const createPasswordOperation = item => async dispatch => {
 
 export const deletePasswordOperation = id => async dispatch => {
   try {
-    // const res = await api.requestPost(`/password/${id}`); new
-    // dispatch(create(res.data));
+    const res = await api.deleteItem(`/password/${id}`);
+    dispatch(deleteItem(id));
   } catch (error) {
     if (error.response?.data) {
       dispatch(setError(error.response.data));
@@ -56,10 +56,11 @@ export const deletePasswordOperation = id => async dispatch => {
   }
 };
 
-export const changePasswordOperation = body => async dispatch => {
+export const changePasswordOperation = (id, body) => async dispatch => {
   try {
-    // const res = await api.requestPost(`/password/${id}`, body); new api
-    // dispatch(create(res.data));
+    const res = await api.changeItem(`/password/${id}`, body);
+
+    dispatch(change(res.data));
   } catch (error) {
     if (error.response?.data) {
       dispatch(setError(error.response.data));

@@ -6,24 +6,32 @@ const PasswordItem = ({ name, password, id, login, handleModal }) => {
   const handleChange = () => {
     setShowPas(prev => !prev);
   };
+
+  const hidePas = lengthPas => {
+    let pas = '';
+
+    for (let index = 0; index < lengthPas; index++) {
+      pas = `${pas}*`;
+    }
+
+    return pas;
+  };
   return (
     <li className={styles.item}>
       <span className={styles.setting} onClick={() => handleModal(id)}></span>
-      <p>{name}</p>
+      <p className={styles.title}>{name}</p>
       <p className={styles.login}>{login}</p>
-      <label>
-        <input
-          readOnly
-          type={showPas ? 'text' : 'password'}
-          name="password"
-          value={password}
-        />
-        {showPas ? (
+      {showPas ? (
+        <div className={styles.password_active}>
+          {password}
           <span onClick={handleChange} className={styles.show}></span>
-        ) : (
+        </div>
+      ) : (
+        <div className={styles.password}>
+          {hidePas(password.length)}
           <span onClick={handleChange} className={styles.show_active}></span>
-        )}
-      </label>
+        </div>
+      )}
     </li>
   );
 };

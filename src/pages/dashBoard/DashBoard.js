@@ -23,17 +23,30 @@ const DashBoard = () => {
   };
   const closeModalByKey = e => {
     if (e.code === 'Escape') {
+      setCurrentOpenedItem(null);
       setIsOpenedModal(false);
       setCreateModalForm(false);
       return;
     }
   };
   const closeModal = e => {
+    if (!e) {
+      setCurrentOpenedItem(null);
+      setIsOpenedModal(false);
+      setCreateModalForm(false);
+      return;
+    }
+    if (!e.target) {
+      setIsOpenedModal(false);
+      return;
+    }
     if (e.target === e.currentTarget) {
+      setCurrentOpenedItem(null);
       setIsOpenedModal(false);
       setCreateModalForm(false);
     }
     if (e.target.dataset.close === 'close') {
+      setCurrentOpenedItem(null);
       setIsOpenedModal(false);
       setCreateModalForm(false);
     }
@@ -56,12 +69,21 @@ const DashBoard = () => {
             <Sidebar />
             {isOpenedModal && (
               <Modal closeModal={closeModal} closeModalByKey={closeModalByKey}>
-                <CreatePasForm contentModal={contentModal} type="change" />
+                <CreatePasForm
+                  closeModal={closeModal}
+                  contentModal={contentModal}
+                  type="change"
+                  currentOpenedItem={currentOpenedItem}
+                />
               </Modal>
             )}
             {createModalForm && (
               <Modal closeModal={closeModal} closeModalByKey={closeModalByKey}>
-                <CreatePasForm contentModal={contentModal} type="create" />
+                <CreatePasForm
+                  contentModal={contentModal}
+                  type="create"
+                  closeModal={closeModal}
+                />
               </Modal>
             )}
             {loader && !error && (

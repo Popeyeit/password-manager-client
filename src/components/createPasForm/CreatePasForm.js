@@ -1,13 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { createPasswordOperation } from '../../redux/password/operations';
+import {
+  createPasswordOperation,
+  deletePasswordOperation,
+  changePasswordOperation,
+} from '../../redux/password/operations';
 import styles from './styles.module.css';
 const initState = {
   name: '',
   password: '',
   login: '',
 };
-const CreatePasForm = ({ contentModal, type = null }) => {
+const CreatePasForm = ({
+  contentModal,
+  type = 'create',
+  currentOpenedItem,
+  closeModal,
+}) => {
   const dispatch = useDispatch();
 
   const [formValues, SetFormValues] = useState(initState);
@@ -19,11 +28,28 @@ const CreatePasForm = ({ contentModal, type = null }) => {
   const showPasFn = () => {
     setShowPas(prev => !prev);
   };
+  const deleteItem = () => {
+    dispatch(deletePasswordOperation(currentOpenedItem));
+    SetFormValues(initState);
+    closeModal();
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
-    dispatch(createPasswordOperation({ ...formValues }));
+    if (type === 'create') {
+      dispatch(createPasswordOperation({ ...formValues }));
+    }
+    if (type === 'change') {
+      dispatch(
+        changePasswordOperation(currentOpenedItem, {
+          name: formValues.name,
+          login: formValues.login,
+          password: formValues.password,
+        }),
+      );
+    }
     SetFormValues(initState);
+    closeModal();
   };
   useEffect(() => {
     if (!contentModal) {
@@ -75,7 +101,13 @@ const CreatePasForm = ({ contentModal, type = null }) => {
       {type === 'change' ? (
         <div className={styles.btn_wrapper}>
           <button className={styles.change_btn}>Изменить</button>
-          <button className={styles.delete_btn}>Удалить</button>
+          <button
+            className={styles.delete_btn}
+            type="button"
+            onClick={deleteItem}
+          >
+            Удалить
+          </button>
         </div>
       ) : (
         <button className={styles.add_btn}>Добавить</button>

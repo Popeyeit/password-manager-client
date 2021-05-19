@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { deleteItem } from '../redux/password/slice';
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
 const Api = {
@@ -16,6 +17,14 @@ const Api = {
   async requestGet(url) {
     const res = await axios.get(url);
 
+    return res;
+  },
+  async deleteItem(url) {
+    const res = await axios.delete(url);
+    return res;
+  },
+  async changeItem(url, data) {
+    const res = await axios.patch(url, data);
     return res;
   },
 };

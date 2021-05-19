@@ -9,10 +9,8 @@
   background-color: #fff;
   max-width: 350px;
   max-height: 180px;
-}
-
-.item {
   margin-bottom: 40px;
+  /* background: linear-gradient(to bottom, #fff, rgba(0, 0, 255, 0.6)); */
 }
 
 .setting {
@@ -33,30 +31,44 @@
 
 .item p {
   padding: 0 10px;
-  overflow: hidden;
   font-size: 20px;
   margin-bottom: 14px;
 }
-
-.item label {
-  position: relative;
+.title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-transform: uppercase;
 }
-.item input {
-  padding: 4px;
-  width: 80%;
-  height: 44px;
-  border: 1px solid rgb(224, 224, 224);
-  border-radius: 5px;
-  color: rgb(79, 79, 79);
+.login {
+}
+
+.password {
+  position: relative;
+  /* border: 1px solid rgb(155, 155, 155); */
+  border-bottom: 1px solid rgb(0, 0, 0);
+  padding: 4px 30px 4px 10px;
   font-size: 18px;
-  line-height: 19px;
-  padding: 8px 20px;
-  outline: none;
-  margin-bottom: 6px;
+  line-height: 40px;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.password_active {
+  position: relative;
+  border-bottom: 1px solid rgb(0, 0, 0);
+  padding: 4px 30px 4px 10px;
+  font-size: 18px;
+  line-height: 30px;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .show {
-  right: 4px;
+  right: 8px;
   position: absolute;
   background-image: url('../../img/eye.svg');
   background-size: contain;

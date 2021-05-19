@@ -95,7 +95,11 @@
   color: #fff;
   width: 90%;
   height: 44px;
-  background-color: rgba(255, 0, 0, 0.7);
+  background-color: rgba(255, 0, 0, 0.8);
   composes: btn_compose;
   max-width: 240px;
+}
+
+.delete_btn:hover {
+  background-color: rgba(255, 0, 0, 1);
 }
