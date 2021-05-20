@@ -14,10 +14,8 @@ export const registerOperation = data => async dispatch => {
     dispatch(setLoader(true));
     const res = await api.requestPost('/register', data);
     dispatch(register(res.data.email));
-    dispatch(setToken(res.data.token));
-    api.setToken(res.data.token);
   } catch (error) {
-    dispatch(setError(error.response.data));
+    dispatch(setError(error.response?.data));
   } finally {
     dispatch(unsetLoader(false));
   }
@@ -32,7 +30,7 @@ export const loginOperation = data => async dispatch => {
     dispatch(setToken(res.data.token));
     api.setToken(res.data.token);
   } catch (error) {
-    dispatch(setError(error.response.data));
+    dispatch(setError(error.response?.data));
   } finally {
     dispatch(unsetLoader(false));
   }
@@ -56,7 +54,7 @@ export const getCurrentUserOperation = () => async (dispatch, getState) => {
       dispatch(unsetToken());
       return;
     }
-    dispatch(setError(error.response.data));
+    dispatch(setError(error.response?.data));
   } finally {
     dispatch(unsetLoader(false));
   }
@@ -69,9 +67,17 @@ export const logoutOperation = () => async dispatch => {
     dispatch(unsetToken());
     api.unsetToken();
   } catch (error) {
-    dispatch(setError(error.response.data));
+    dispatch(setError(error.response?.data));
   } finally {
   }
 };
 
-export const recoverPasswordOperation = data => async dispatch => {};
+export const recoverPasswordOperation = data => async dispatch => {
+  try {
+    const res = await api.requestPost('/recover/password', data);
+    console.log(res);
+  } catch (error) {
+    dispatch(setError(error.response?.data));
+  } finally {
+  }
+};

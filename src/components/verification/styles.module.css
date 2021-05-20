@@ -1,0 +1,46 @@
+.confirmed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url('../../img/confirm_email.svg');
+  background-repeat: no-repeat;
+  background-size: 100vw 100vh;
+  background-position: center;
+}
+
+.confirmed_wrapper {
+  max-width: 300px;
+  height: 350px;
+  margin: 0 auto;
+}
+
+.confirmed_text {
+  color: #24cca7;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 22px;
+  text-align: center;
+  line-height: 68px;
+}
+
+@media (min-width: 768px) {
+  .confirmed_text {
+    font-family: 'Montserrat';
+    font-weight: bold;
+    font-size: 22px;
+    text-align: center;
+    line-height: 68px;
+  }
+  .confirmed_wrapper {
+    max-width: 1000px;
+  }
+
+  .confirmed_email_wrapper {
+    width: 540px;
+    height: 68px;
+    background-color: #fff;
+    border-radius: 20px;
+    transform: translateY(160%);
+  }
+}

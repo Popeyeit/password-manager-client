@@ -15,7 +15,6 @@ export const getPasswordsOperation = () => async (dispatch, getState) => {
     dispatch(setLoader(true));
     api.setToken(hasToken);
     const res = await api.requestGet('/password');
-    console.log(res);
     dispatch(get(res.data));
   } catch (error) {
     if (error.response?.data) {
@@ -44,7 +43,7 @@ export const createPasswordOperation = item => async dispatch => {
 
 export const deletePasswordOperation = id => async dispatch => {
   try {
-    const res = await api.deleteItem(`/password/${id}`);
+    await api.deleteItem(`/password/${id}`);
     dispatch(deleteItem(id));
   } catch (error) {
     if (error.response?.data) {

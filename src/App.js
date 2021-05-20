@@ -6,13 +6,11 @@ import Home from './pages/home/Home';
 import { getCurrentUserOperation } from './redux/user/operations';
 import './App.css';
 import Auth from './components/auth/Auth';
-
-const redirectToHome = () => {
-  return <Redirect to="/home" />;
-};
+import Verification from './components/verification/Verification';
 
 function App() {
   const { token } = useSelector(state => state.auth);
+  const error = useSelector(state => state.error);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -20,6 +18,7 @@ function App() {
   }, [dispatch]);
   return (
     <div className="App">
+      {error === 500 && <Redirect to="/server-down" />}
       <Switch>
         {token ? (
           <Switch>
@@ -32,6 +31,9 @@ function App() {
           <Switch>
             <Route path="/home" exact>
               <Home />
+            </Route>
+            <Route path="/verification">
+              <Verification />
             </Route>
             <Route path="/sign-up">
               <Auth textBtn="Регистрация" type="signUp" />

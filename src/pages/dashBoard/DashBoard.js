@@ -53,12 +53,12 @@ const DashBoard = () => {
   };
   const contentModal = useMemo(() => {
     return passwords.find(pas => pas.id === currentOpenedItem);
-  }, [currentOpenedItem]);
+  }, [currentOpenedItem, passwords]);
   useEffect(() => {
     (async () => {
       await dispatch(getPasswordsOperation());
     })();
-  }, []);
+  }, [dispatch]);
 
   return (
     <>
@@ -66,7 +66,7 @@ const DashBoard = () => {
         <div>
           <DashBoardHeader />
           <div className={styles.wrapper}>
-            <Sidebar />
+            <Sidebar closeModal={closeModal} />
             {isOpenedModal && (
               <Modal closeModal={closeModal} closeModalByKey={closeModalByKey}>
                 <CreatePasForm

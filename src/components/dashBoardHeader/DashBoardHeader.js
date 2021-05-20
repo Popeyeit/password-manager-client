@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from '../../redux/filter/slice';
 import { logoutOperation } from '../../redux/user/operations';

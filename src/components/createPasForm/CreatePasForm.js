@@ -56,7 +56,7 @@ const CreatePasForm = ({
       return;
     }
     SetFormValues(contentModal);
-  }, []);
+  }, [contentModal]);
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
       <label>

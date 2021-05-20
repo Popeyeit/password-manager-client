@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Formik, Form, Field, useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
+import { useFormik } from 'formik';
 import validate from './validate';
 import {
   registerOperation,
@@ -9,13 +10,14 @@ import {
 } from '../../redux/user/operations';
 import { unsetError } from '../../redux/error/slice';
 import styles from './styles.module.css';
-// import Indicate from '../indicate/Indicate';
 
 const AuthForm = ({ type = 'signUp', textBtn }) => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const error = useSelector(state => state.error);
   const [verification, setVerification] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState(false);
+  console.log(verification);
 
   const formik = useFormik({
     initialValues: {
@@ -37,6 +39,7 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
           registerOperation({ email: values.email, password: values.password }),
         );
         setVerification('Подтвердите Ваш адрес электронной почты.');
+        history.push('/verification');
       }
       if (type === 'signIn') {
         dispatch(
@@ -44,10 +47,12 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
         );
       }
       if (type === 'recoverPassword') {
-        recoverPasswordOperation({
-          email: values.email,
-          password: values.password,
-        });
+        dispatch(
+          recoverPasswordOperation({
+            email: values.email,
+            password: values.password,
+          }),
+        );
         setVerification('Подтвердите Ваш адрес электронной почты.');
       }
 
@@ -56,10 +61,12 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
   });
 
   useMemo(() => {
+    if (formik.values.email.length > 0 || formik.values.password.length > 0) {
+      setVerification('');
+    }
     dispatch(unsetError(''));
     setConfirmedPassword(false);
-    setVerification('');
-  }, [formik.values.password, formik.values.email]);
+  }, [formik.values.password, formik.values.email, dispatch]);
 
   useMemo(() => {
     formik.resetForm();
@@ -70,7 +77,9 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
         <p className={styles.error_pas}>Пароли не совпадают</p>
       )}
       {!error && verification && (
-        <p className={styles.verification}>{verification}</p>
+        <p className={styles.verification}>
+          Подтвердите Ваш адрес электронной почты.
+        </p>
       )}
       {error && <p> {error}</p>}
 
@@ -98,9 +107,7 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
           onChange={formik.handleChange}
           value={formik.values.password}
         />
-        {/*{type === 'signUp' && formik.values.password.length > 0 && (
-          <Indicate safety={formik.values.password} />
-        )}*/}
+
         {formik.errors.password ? (
           <span className={styles.error}>{formik.errors.password}</span>
         ) : null}

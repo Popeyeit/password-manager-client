@@ -7,7 +7,7 @@ const Modal = ({ children, closeModal, closeModalByKey }) => {
     return () => {
       window.removeEventListener('keydown', closeModalByKey);
     };
-  }, []);
+  }, [closeModalByKey]);
   return (
     <div className={styles.modal} onClick={closeModal}>
       <div className={styles.modal_content}>
