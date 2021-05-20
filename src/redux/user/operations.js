@@ -30,7 +30,10 @@ export const loginOperation = data => async dispatch => {
     dispatch(setToken(res.data.token));
     api.setToken(res.data.token);
   } catch (error) {
-    dispatch(setError(error.response?.data));
+    if (error.response.status === 500) {
+      dispatch(setError('неполадки на сервере'));
+    }
+    dispatch(setError('не верный логин или пароль'));
   } finally {
     dispatch(unsetLoader(false));
   }
@@ -52,9 +55,9 @@ export const getCurrentUserOperation = () => async (dispatch, getState) => {
       api.unsetToken();
       dispatch(logout());
       dispatch(unsetToken());
+
       return;
     }
-    dispatch(setError(error.response?.data));
   } finally {
     dispatch(unsetLoader(false));
   }
@@ -67,17 +70,20 @@ export const logoutOperation = () => async dispatch => {
     dispatch(unsetToken());
     api.unsetToken();
   } catch (error) {
-    dispatch(setError(error.response?.data));
+    if (error.response.status === 500) {
+      dispatch(setError('неполадки на сервере'));
+    }
   } finally {
   }
 };
 
 export const recoverPasswordOperation = data => async dispatch => {
   try {
-    const res = await api.requestPost('/recover/password', data);
-    console.log(res);
+    await api.requestPost('/recover/password', data);
   } catch (error) {
-    dispatch(setError(error.response?.data));
+    if (error.response.status === 500) {
+      dispatch(setError('неполадки на сервере'));
+    }
   } finally {
   }
 };

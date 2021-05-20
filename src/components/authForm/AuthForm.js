@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -17,7 +17,12 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
   const error = useSelector(state => state.error);
   const [verification, setVerification] = useState('');
   const [confirmedPassword, setConfirmedPassword] = useState(false);
-  console.log(verification);
+  useEffect(() => {
+    dispatch(unsetError(''));
+    return () => {
+      dispatch(unsetError(''));
+    };
+  }, [dispatch, type]);
 
   const formik = useFormik({
     initialValues: {
@@ -64,7 +69,7 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
     if (formik.values.email.length > 0 || formik.values.password.length > 0) {
       setVerification('');
     }
-    dispatch(unsetError(''));
+
     setConfirmedPassword(false);
   }, [formik.values.password, formik.values.email, dispatch]);
 

@@ -18,10 +18,12 @@ export const getPasswordsOperation = () => async (dispatch, getState) => {
     dispatch(get(res.data));
   } catch (error) {
     if (error.response?.data) {
-      dispatch(setError(error.response.data));
+      dispatch(setError('что-то пошло не так'));
       return;
     }
-    dispatch(setError('server is down'));
+    if (error.response.status === 500) {
+      dispatch(setError('неполадки на сервере'));
+    }
   } finally {
     dispatch(unsetLoader(false));
   }
@@ -33,10 +35,10 @@ export const createPasswordOperation = item => async dispatch => {
     dispatch(create(res.data));
   } catch (error) {
     if (error.response?.data) {
-      dispatch(setError(error.response.data));
+      dispatch(setError('что-то пошло не так'));
       return;
     }
-    dispatch(setError('server is down'));
+    dispatch(setError('неполадки на сервере'));
   } finally {
   }
 };
@@ -47,10 +49,10 @@ export const deletePasswordOperation = id => async dispatch => {
     dispatch(deleteItem(id));
   } catch (error) {
     if (error.response?.data) {
-      dispatch(setError(error.response.data));
+      dispatch(setError('что-то пошло не так'));
       return;
     }
-    dispatch(setError('server is down'));
+    dispatch(setError('неполадки на сервере'));
   } finally {
   }
 };
@@ -62,10 +64,10 @@ export const changePasswordOperation = (id, body) => async dispatch => {
     dispatch(change(res.data));
   } catch (error) {
     if (error.response?.data) {
-      dispatch(setError(error.response.data));
+      dispatch(setError('что-то пошло не так'));
       return;
     }
-    dispatch(setError('server is down'));
+    dispatch(setError('неполадки на сервере'));
   } finally {
   }
 };
