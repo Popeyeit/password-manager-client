@@ -9,11 +9,9 @@ const PasswordItem = ({ name, password, id, login, handleModal }) => {
 
   const hidePas = lengthPas => {
     let pas = '';
-
     for (let index = 0; index < lengthPas; index++) {
       pas = `${pas}*`;
     }
-
     return pas;
   };
   return (

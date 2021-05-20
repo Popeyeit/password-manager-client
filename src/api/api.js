@@ -1,6 +1,6 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'https://popeye-password-manager.herokuapp.com/api';
-// axios.defaults.baseURL = 'http://localhost:5000/api';
+// axios.defaults.baseURL = 'https://popeye-password-manager.herokuapp.com/api';
+axios.defaults.baseURL = 'http://localhost:5000/api';
 
 const Api = {
   setToken(token) {
