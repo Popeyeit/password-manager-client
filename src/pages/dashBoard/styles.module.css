@@ -19,6 +19,7 @@
   color: #fff;
   transition: all 200ms linear;
 }
+
 .open_create_btn:hover {
   transform: scale(1.2);
 }

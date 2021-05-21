@@ -100,7 +100,7 @@ const DashBoard = () => {
           className={styles.open_create_btn}
           onClick={openModalCreateItem}
         >
-          +
+          <span>+</span>
         </button>
       </section>
     </>
