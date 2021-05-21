@@ -9,13 +9,19 @@ import {
 } from './slice';
 import { setLoader, unsetLoader } from '../loader/slice';
 import { setError } from '../error/slice';
-export const registerOperation = data => async dispatch => {
+export const registerOperation = (data, history) => async dispatch => {
   try {
     dispatch(setLoader(true));
     const res = await api.requestPost('/register', data);
     dispatch(register(res.data.email));
+    history.push('/verification');
   } catch (error) {
-    dispatch(setError(error.response?.data));
+    if (error.response.status === 409) {
+      dispatch(setError('Такой e-mail уже зарегистрирован'));
+    }
+    if (error.response.status === 500) {
+      dispatch(setError('неполадки на сервере'));
+    }
   } finally {
     dispatch(unsetLoader(false));
   }

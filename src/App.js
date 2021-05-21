@@ -4,13 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import DashBoard from './pages/dashBoard/DashBoard';
 import Home from './pages/home/Home';
 import { getCurrentUserOperation } from './redux/user/operations';
-import './App.css';
 import Auth from './components/auth/Auth';
 import Verification from './components/verification/Verification';
+import './App.css';
 
 function App() {
   const { token } = useSelector(state => state.auth);
-  const error = useSelector(state => state.error);
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -18,7 +17,6 @@ function App() {
   }, [dispatch]);
   return (
     <div className="App">
-      {error === 500 && <Redirect to="/server-down" />}
       <Switch>
         {token ? (
           <Switch>

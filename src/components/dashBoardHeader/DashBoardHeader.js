@@ -7,12 +7,16 @@ import styles from './styles.module.css';
 const DashBoardHeader = () => {
   const dispatch = useDispatch();
   const filter = useSelector(state => state.filter);
+  const loader = useSelector(state => state.loader);
+  const error = useSelector(state => state.error);
+  const email = useSelector(state => state.auth.user);
   const handleChange = ({ target }) => {
     dispatch(setFilter(target.value));
   };
   const handleLogout = () => {
     dispatch(logoutOperation());
   };
+
   return (
     <div className={styles.header}>
       <div className="container">
@@ -29,15 +33,18 @@ const DashBoardHeader = () => {
             </label>
           </div>
           <div className={styles.user}>
-            <p className={styles.email}>popeyeIT@gmail.com</p>
-
-            <button
-              type="button"
-              className={styles.logout}
-              onClick={handleLogout}
-            >
-              Выход
-            </button>
+            {!loader && !error && email && (
+              <>
+                <p className={styles.email}>{email}</p>
+                <button
+                  type="button"
+                  className={styles.logout}
+                  onClick={handleLogout}
+                >
+                  Выход
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -41,10 +41,11 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
       }
       if (type === 'signUp') {
         dispatch(
-          registerOperation({ email: values.email, password: values.password }),
+          registerOperation(
+            { email: values.email, password: values.password },
+            history,
+          ),
         );
-        setVerification('Подтвердите Ваш адрес электронной почты.');
-        history.push('/verification');
       }
       if (type === 'signIn') {
         dispatch(
@@ -58,7 +59,7 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
             password: values.password,
           }),
         );
-        setVerification('Подтвердите Ваш адрес электронной почты.');
+        history.push('/verification');
       }
 
       formik.resetForm();
@@ -68,6 +69,7 @@ const AuthForm = ({ type = 'signUp', textBtn }) => {
   useMemo(() => {
     if (formik.values.email.length > 0 || formik.values.password.length > 0) {
       setVerification('');
+      dispatch(unsetError(''));
     }
 
     setConfirmedPassword(false);
